@@ -21,7 +21,6 @@ function Hearts({ lives }: { lives: number }) {
   )
 }
 
-// ─── Home Screen ────────────────────────────────────────────────────────────
 function HomeScreen({ onStart }: { onStart: () => void }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
@@ -48,7 +47,6 @@ function HomeScreen({ onStart }: { onStart: () => void }) {
   )
 }
 
-// ─── Game Over Screen ────────────────────────────────────────────────────────
 function GameOverScreen({
   score,
   totalRounds,
@@ -90,7 +88,6 @@ function GameOverScreen({
   )
 }
 
-// ─── Playing Screen ──────────────────────────────────────────────────────────
 function PlayingScreen({
   state,
   newRound,
@@ -213,7 +210,6 @@ function PlayingScreen({
   )
 }
 
-// ─── Root ────────────────────────────────────────────────────────────────────
 function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const { state, newRound, choose, resetGame } = useGame(entries)
@@ -245,7 +241,10 @@ function App() {
         <GameOverScreen
           score={state.score}
           totalRounds={state.totalRounds}
-          onPlayAgain={handleStart}
+          onPlayAgain={() => {
+            resetGame()
+            setScreen('home')
+          }}
         />
       )}
     </div>
